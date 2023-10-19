@@ -5,13 +5,14 @@ export default class Game {
     constructor(canvas){
         this.canvas = canvas;
         this.ctx = canvas.getContext("2d");
-        this.x = 50; // initial x position
-        this.y = canvas.height-350; // Initial Y position
+        this.x = 375; // initial x position
+        this.y = canvas.height-150; // Initial Y position
 
         this.player = new Player(this, this.canvas, this.ctx, this.x, this.y);
+        this.gameLoop();
     }
 
-    drawBaseline(x, y){
+    drawBaseline(){
         this.ctx.beginPath();
         this.ctx.moveTo(50, 500);
         this.ctx.lineTo(750, 500);
@@ -21,9 +22,9 @@ export default class Game {
     }
 
     gameLoop(){
-        debugger
-        this.player.update();
         this.player.draw();
+        this.drawBaseline();
+        requestAnimationFrame(this.gameLoop.bind(this));
     }
    
 
