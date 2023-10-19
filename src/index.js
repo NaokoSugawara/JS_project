@@ -11,7 +11,16 @@ import Game from "./scripts/game";
 
 const canvas = document.getElementById('runner_game');
 const game = new Game(canvas);
-game.gameLoop();
+
+game.drawBaseline();
+game.player.drawSquare();
+
+document.addEventListener('keydown', (e) => {
+    if (e.code === 'Space') {
+        game.gameLoop();
+    }
+});
+
 
 
 
