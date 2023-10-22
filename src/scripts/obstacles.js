@@ -7,13 +7,16 @@ export default class Obstacles {
             y: 450
         }
         this.velocity = 2;
-
-        this.obstacles = [];
-
-        for (let i=0; i<3; i++) {
-            const randomDistance =  Math.floor(Math.random() * 1000) + 700;
-            this.obstacles.push(this.generateObstacle(randomDistance));
-        }
+        const spaceBetObstacles = 150;
+        this.firstObsDistance = Math.floor(Math.random() * 1000) + 700;
+        const randomNum1 = Math.floor(Math.random() * 300) + 100;
+        const randomNum2 = Math.floor(Math.random() * 300) + 100;
+  
+        this.obstacles = [
+        this.generateObstacle(this.firstObsDistance),
+        this.generateObstacle(this.firstObsDistance + spaceBetObstacles + randomNum1),
+        this.generateObstacle(this.firstObsDistance + (spaceBetObstacles * 2) + randomNum2)
+        ];
     }
 
     
@@ -30,12 +33,13 @@ export default class Obstacles {
             obstacle.left -= this.velocity
             obstacle.right -= this.velocity
         });
-    // debugger
+
         // If a obstacles has left the screen, add a new one to the end.
         if (this.obstacles[0].right <= 0) {
             this.obstacles.shift();
-            const newX = this.obstacles[1].left;
-            this.obstacles.push(this.generateObstacle(newX));
+            const randomNum = Math.floor(Math.random() * 300) + 100;
+            const x = this.firstObsDistance + randomNum;
+            this.obstacles.push(this.generateObstacle(x));
         }
     }
 
