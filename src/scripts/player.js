@@ -79,6 +79,8 @@ export default class Player {
     draw() {
         // Clear the canvas
         this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+        this.game.drawBackground();
+        // debugger
         this.animate();
 
 

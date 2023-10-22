@@ -8,11 +8,12 @@ export default class Game {
         this.x = 375; // initial x position
         this.y = canvas.height-150; // Initial Y position
 
-        this.player = new Player(this, this.canvas, this.ctx, this.x, this.y);
-
         this.img = new Image();
         this.img.src = './src/img/background.jpg';
-        this.drawBackground(this.img);
+
+        this.player = new Player(this, this.canvas, this.ctx, this.x, this.y);
+
+
         // debugger
         // this.img.addEventListener(
         //     "load",
@@ -33,15 +34,16 @@ export default class Game {
         this.ctx.stroke();
     }
 
-    gameLoop(img){
+    gameLoop(){
+        // debugger
         this.player.draw();
         this.drawBaseline();
         requestAnimationFrame(this.gameLoop.bind(this));
     }
    
-    drawBackground(img){
+    drawBackground(){
         // debugger
-        this.ctx.drawImage(img, 0, 0);
+        this.ctx.drawImage(this.img, 0, 0);
         // img.onload = () => {
         //     this.ctx.drawImage(img.src, 0, 0);
         // }
