@@ -1,13 +1,14 @@
 
 export default class Player {
 
-    constructor(game, canvas, ctx, x, y){
+    constructor(game, obstacles, canvas, ctx, x, y){
         this.game = game;
+        this.obstacles = obstacles;
         this.canvas = canvas;
         this.ctx = ctx;
         this.position = {
-            x: 100,
-            y: 100
+            x: 330,
+            y: 400
         }
         this.velocity = {
             y: 0,
@@ -49,12 +50,7 @@ export default class Player {
     }
 
     animate() { // 位置を決めている
-        
-// debugger
-        // if (this.position.y > this.canvas.height - this.height - this.velocity.y - 100) {
-        //     // debugger;
-        //     this.velocity.y = 0;
-        // }
+
         if (this.position.y + this.height + this.velocity.y + 100 < this.canvas.height) {
             this.velocity.y += this.gravity;
         } else {
@@ -62,11 +58,6 @@ export default class Player {
         }
         this.position.x += this.velocity.x;
         this.position.y += this.velocity.y;
-        // console.log(this.velocity.y);
-        // console.log(this.canvas.height);
-        // console.log(this.position.y);
-        // console.log(this.position.y + this.height + this.velocity.y);
-        
 
     }
 
@@ -79,16 +70,17 @@ export default class Player {
     draw() {
         // Clear the canvas
         this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+
+        // Draw background
         this.game.drawBackground();
-        // debugger
         this.animate();
 
+        // Draw obstacles;
+        this.obstacles.animate();
 
-        // Draw the square
+        // Draw player
         this.drawPlayer();
 
-        // Request the next frame
-        // debugger
        
     }
 

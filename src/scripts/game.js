@@ -1,4 +1,5 @@
 import Player from "./player";
+import Obstacles from "./obstacles";
 
 export default class Game {
 
@@ -11,16 +12,9 @@ export default class Game {
         this.img = new Image();
         this.img.src = './src/img/background.jpg';
 
-        this.player = new Player(this, this.canvas, this.ctx, this.x, this.y);
-
-
-        // debugger
-        // this.img.addEventListener(
-        //     "load",
-            
-        //     this.ctx.drawImage.call(this, args),
-        //     false,
-        // );
+        this.obstacles = new Obstacles(this.ctx);
+        this.player = new Player(this, this.obstacles, this.canvas, this.ctx, this.x, this.y);
+   
 
         this.gameLoop();
     }
@@ -42,14 +36,8 @@ export default class Game {
     }
    
     drawBackground(){
-        // debugger
         this.ctx.drawImage(this.img, 0, 0);
-        // img.onload = () => {
-        //     this.ctx.drawImage(img.src, 0, 0);
-        // }
-        // img.onload();
-        
-    }
+     }
         
 
     // jump() {
