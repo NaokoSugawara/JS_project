@@ -9,6 +9,18 @@ export default class Game {
         this.y = canvas.height-150; // Initial Y position
 
         this.player = new Player(this, this.canvas, this.ctx, this.x, this.y);
+
+        this.img = new Image();
+        this.img.src = './src/img/background.jpg';
+        this.drawBackground(this.img);
+        // debugger
+        // this.img.addEventListener(
+        //     "load",
+            
+        //     this.ctx.drawImage.call(this, args),
+        //     false,
+        // );
+
         this.gameLoop();
     }
 
@@ -21,13 +33,22 @@ export default class Game {
         this.ctx.stroke();
     }
 
-    gameLoop(){
+    gameLoop(img){
         this.player.draw();
         this.drawBaseline();
         requestAnimationFrame(this.gameLoop.bind(this));
     }
    
-
+    drawBackground(img){
+        // debugger
+        this.ctx.drawImage(img, 0, 0);
+        // img.onload = () => {
+        //     this.ctx.drawImage(img.src, 0, 0);
+        // }
+        // img.onload();
+        
+    }
+        
 
     // jump() {
     // }

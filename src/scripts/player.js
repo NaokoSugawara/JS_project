@@ -1,15 +1,4 @@
 
-// const square = {
-//     width: 30,
-//     height: 30,
-//     jumpHeight: 100,
-//     // jumping: true,
-//     jumpingUp: true,
-//     jumpStartY: 0,
-//     jumpSpeed: 20,
-//     verocity: 0
-// };
-
 export default class Player {
 
     constructor(game, canvas, ctx, x, y){
@@ -48,6 +37,7 @@ export default class Player {
             }
         })
 
+        // stop movement
         document.addEventListener("keyup", (e) => {
             // console.log(e);
             if (e.code === "ArrowLeft") {
@@ -58,17 +48,26 @@ export default class Player {
         })
     }
 
-    animate() { 
-        this.velocity.y += this.gravity;
-
-        if (this.position.y > this.canvas.height - this.height - this.velocity.y - 100) {
-            // debugger;
+    animate() { // 位置を決めている
+        
+// debugger
+        // if (this.position.y > this.canvas.height - this.height - this.velocity.y - 100) {
+        //     // debugger;
+        //     this.velocity.y = 0;
+        // }
+        if (this.position.y + this.height + this.velocity.y + 100 < this.canvas.height) {
+            this.velocity.y += this.gravity;
+        } else {
             this.velocity.y = 0;
         }
         this.position.x += this.velocity.x;
-        console.log(this.velocity.y);
-        console.log(this.position.y);
         this.position.y += this.velocity.y;
+        // console.log(this.velocity.y);
+        // console.log(this.canvas.height);
+        // console.log(this.position.y);
+        // console.log(this.position.y + this.height + this.velocity.y);
+        
+
     }
 
     drawPlayer() {
