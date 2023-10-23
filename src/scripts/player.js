@@ -1,14 +1,16 @@
 
 export default class Player {
 
-    constructor(game, obstacles, canvas, ctx, x, y){
+    constructor(game, obstacles, canvas, ctx){
         this.game = game;
         this.obstacles = obstacles;
         this.canvas = canvas;
         this.ctx = ctx;
         this.position = {
             x: 330,
+            // x: 250,
             y: 400
+            // y: 300
         }
         this.velocity = {
             y: 0,
@@ -20,10 +22,14 @@ export default class Player {
         this.width = 100;
         this.height = 100;
 
+        this.img = new Image();
+        this.img.src = './src/img/hashiru_girl.png';
+
         this.addEventHandlers();
 
     }
 
+    // Update velocity
     addEventHandlers() {
         document.addEventListener("keydown", (e) => {
             // console.log(e);
@@ -49,11 +55,13 @@ export default class Player {
         })
     }
 
-    animate() { // 位置を決めている
+    animate() { 
 
-        if (this.position.y + this.height + this.velocity.y + 100 < this.canvas.height) {
+        // It keeps falling unless the players bottom reaches to the bottom 
+        if (this.position.y + this.height + this.velocity.y < this.canvas.height - 100) {
             this.velocity.y += this.gravity;
         } else {
+            // Once the player reaches at the bottom, it'll stop falling
             this.velocity.y = 0;
         }
         this.position.x += this.velocity.x;
@@ -65,6 +73,7 @@ export default class Player {
         // Draw the square
         this.ctx.fillStyle = 'green';
         this.ctx.fillRect(this.position.x, this.position.y, this.width, this.height);
+        // drawCharactor();
     }
 
     draw() {
@@ -73,16 +82,52 @@ export default class Player {
 
         // Draw background
         this.game.drawBackground();
-        this.animate();
+        this.animate(); // Update position
 
         // Draw obstacles;
         this.obstacles.animate();
 
+        // Detect collision
+        // debugger
+        // this.detectCollision();
+        
         // Draw player
         this.drawPlayer();
-
-       
     }
 
+      
+    detectCollision(){
+// debugger
+        this.obstacles.obstacles.forEach(obstacle => {
+            const playerLeft = this.position.x;
+            const playerRight = playerLeft + this.width;
+            const playerBottom = this.position.y + this.height;
+            const that = this;
+                // this.eachObstacles(obstacle => { 
+                //     obstacle.velocity = 0;
+                // }) 
+                // debugger
+            if ((playerBottom >= obstacle.y 
+                && playerLeft <= obstacle.right 
+                && playerRight >= obstacle.left)) {
+                that.obstacles.obstacles.forEach((obstacle) => {
+                    obstacle.velocity = 0;  
+                }) 
+                // Sopt player from falling
+                debugger
+                this.position.y = obstacle.y - this.height;
+                console.log("bello2")
 
+            } else if ((playerBottom >= obstacle.y && obstacle.left <= playerRight)) {
+                that.obstacles.obstacles.forEach((obstacle) => {
+                    obstacle.velocity = 0;  
+                }) 
+                console.log("bello1")
+            } 
+        })
+    }
+
+    // drawCharactor(){
+    //     this.ctx.drawImage(this.img, 0, 0);
+    // }
 }
