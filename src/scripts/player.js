@@ -8,9 +8,8 @@ export default class Player {
         this.ctx = ctx;
         this.position = {
             x: 330,
-            // x: 250,
-            // y: 400
             y: 300
+            // y: 100
         }
         this.velocity = {
             y: 0,
@@ -25,6 +24,8 @@ export default class Player {
         this.img = new Image();
         this.img.src = './src/img/hashiru_girl.png';
 
+        this.collision = false;
+        
         this.addEventHandlers();
 
     }
@@ -58,7 +59,7 @@ export default class Player {
     animate() { 
 // debugger
         // It keeps falling unless the players bottom reaches to the bottom 
-        if (this.position.y + this.height + this.velocity.y < this.canvas.height - 140) {
+        if (!this.collision && (this.position.y + this.height + this.velocity.y < this.canvas.height - 140)) {
             this.velocity.y += this.gravity;
         } else {
             // Once the player reaches at the bottom, it'll stop falling
@@ -92,7 +93,7 @@ export default class Player {
 
         // Detect collision
         // debugger
-        // this.detectCollision();
+        this.detectCollision();
         
         // Draw player
         this.drawPlayer();
@@ -102,31 +103,47 @@ export default class Player {
     detectCollision(){
 // debugger
         this.obstacles.obstacles.forEach(obstacle => {
-            const playerLeft = this.position.x;
-            const playerRight = playerLeft + this.width;
-            const playerBottom = this.position.y + this.height;
-            const that = this;
-                // this.eachObstacles(obstacle => { 
-                //     obstacle.velocity = 0;
-                // }) 
-                // debugger
-            if ((playerBottom >= obstacle.y 
-                && playerLeft <= obstacle.right 
-                && playerRight >= obstacle.left)) {
-                that.obstacles.obstacles.forEach((obstacle) => {
-                    obstacle.velocity = 0;  
-                }) 
-                // Sopt player from falling
-                debugger
-                this.position.y = obstacle.y - this.height;
-                console.log("bello2")
-
-            } else if ((playerBottom >= obstacle.y && obstacle.left <= playerRight)) {
-                that.obstacles.obstacles.forEach((obstacle) => {
-                    obstacle.velocity = 0;  
-                }) 
-                console.log("bello1")
-            } 
+            if (obstacle.left <= this.canvas.width) {
+                const playerLeft = this.position.x;
+                const playerRight = playerLeft + this.width;
+                const playerBottom = this.position.y + this.height;
+                const that = this;
+                    // this.eachObstacles(obstacle => { 
+                    //     obstacle.velocity = 0;
+                    // }) 
+                    // debugger
+                if ((playerBottom >= obstacle.y 
+                    && playerRight >= obstacle.left 
+                    && playerLeft <= obstacle.right)) {
+                    // Stop all the obstacles
+                    that.obstacles.obstacles.forEach((obstacle) => {
+                        obstacle.velocity = 0;  
+                    }) 
+                    // ↓↓↓↓↓↓↓↓↓↓　修正必要　↓↓↓↓↓↓↓↓↓↓
+                    // Stop player from falling 
+                    // this.position.y = obstacle.y - this.height;
+                    this.velocity.y = 0;
+                    this.collision = true;
+                } else if ((playerBottom >= obstacle.y 
+                    && obstacle.left <= playerRight
+                    && playerLeft <= obstacle.right)) {
+                    // Stop all the obstacles
+                    that.obstacles.obstacles.forEach((obstacle) => {
+                        obstacle.velocity = 0;  
+                    }) 
+                    this.velocity.y = 0;
+                    this.collision = true;
+                } else if ((playerBottom >= obstacle.y 
+                    && obstacle.right >= playerLeft
+                    && playerRight >= obstacle.x)){
+                    // Stop all the obstacles
+                    that.obstacles.obstacles.forEach((obstacle) => {
+                        obstacle.velocity = 0;  
+                    }) 
+                    this.velocity.y = 0;
+                    this.collision = true;
+                }
+            }
         })
     }
 

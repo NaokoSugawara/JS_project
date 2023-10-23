@@ -14,7 +14,7 @@ export default class Obstacles {
 
         this.obstacles = [
             this.generateObstacle(this.firstObsDistance),
-            // this.generateObstacle(450),
+            // this.generateObstacle(350),
             this.generateObstacle(this.firstObsDistance + spaceBetObstacles + randomNum1),
             this.generateObstacle(this.firstObsDistance + (spaceBetObstacles * 3) + randomNum2)
         ];
