@@ -9,8 +9,8 @@ export default class Player {
         this.position = {
             x: 330,
             // x: 250,
-            y: 400
-            // y: 300
+            // y: 400
+            y: 300
         }
         this.velocity = {
             y: 0,
@@ -44,7 +44,7 @@ export default class Player {
             }
         })
 
-        // stop movement
+        // Stop movement
         document.addEventListener("keyup", (e) => {
             // console.log(e);
             if (e.code === "ArrowLeft") {
@@ -56,9 +56,9 @@ export default class Player {
     }
 
     animate() { 
-
+// debugger
         // It keeps falling unless the players bottom reaches to the bottom 
-        if (this.position.y + this.height + this.velocity.y < this.canvas.height - 100) {
+        if (this.position.y + this.height + this.velocity.y < this.canvas.height - 140) {
             this.velocity.y += this.gravity;
         } else {
             // Once the player reaches at the bottom, it'll stop falling
@@ -70,10 +70,11 @@ export default class Player {
     }
 
     drawPlayer() {
-        // Draw the square
-        this.ctx.fillStyle = 'green';
-        this.ctx.fillRect(this.position.x, this.position.y, this.width, this.height);
-        // drawCharactor();
+        // // Draw the square
+        // this.ctx.fillStyle = 'green';
+        // this.ctx.fillRect(this.position.x, this.position.y, this.width, this.height);
+        // debugger
+        this.ctx.drawImage(this.img, this.position.x, this.position.y);
     }
 
     draw() {
@@ -82,7 +83,9 @@ export default class Player {
 
         // Draw background
         this.game.drawBackground();
-        this.animate(); // Update position
+
+        // Update player's position
+        this.animate(); 
 
         // Draw obstacles;
         this.obstacles.animate();
@@ -127,7 +130,5 @@ export default class Player {
         })
     }
 
-    // drawCharactor(){
-    //     this.ctx.drawImage(this.img, 0, 0);
-    // }
+
 }

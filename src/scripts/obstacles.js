@@ -18,6 +18,9 @@ export default class Obstacles {
             this.generateObstacle(this.firstObsDistance + spaceBetObstacles + randomNum1),
             this.generateObstacle(this.firstObsDistance + (spaceBetObstacles * 3) + randomNum2)
         ];
+
+        this.img = new Image();
+        this.img.src = './src/img/120Tyrannosaurus_hair.png';
     }
 
     
@@ -25,7 +28,7 @@ export default class Obstacles {
         const obstacle = {
             left: x, 
             right: 50 + x, 
-            y: 450,
+            y: 350,
             velocity: 2
         };
         return obstacle;
@@ -48,16 +51,18 @@ export default class Obstacles {
 
     drawObstacles(ctx){
         // debugger
-        this.eachObstacles(function(obstacle) {
-            ctx.fillStyle = "red";
-            // debugger
-            ctx.fillRect(
-                obstacle.left, 
-                obstacle.y, 
-                50, 
-                50
-            );
+        this.eachObstacles(obstacle => {
+            // ctx.fillStyle = "red";
+            // // debugger
+            // ctx.fillRect(
+            //     obstacle.left, 
+            //     obstacle.y, 
+            //     50, 
+            //     50
+            // );
+            ctx.drawImage(this.img, obstacle.left, obstacle.y);
         });
+        
     }
 
     animate() {

@@ -33,7 +33,7 @@ export default class Game {
     gameLoop(){
         // debugger
         this.player.draw();
-        this.drawBaseline();
+        // this.drawBaseline();
         requestAnimationFrame(this.gameLoop.bind(this));
     }
    
