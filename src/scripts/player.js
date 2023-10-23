@@ -8,7 +8,7 @@ export default class Player {
         this.ctx = ctx;
         this.position = {
             x: 330,
-            y: 300
+            y: 100
             // y: 100
         }
         this.velocity = {
@@ -18,36 +18,70 @@ export default class Player {
 
         this.gravity = 1;
 
-        this.width = 100;
-        this.height = 100;
+        this.width = 80;
+        this.height = 90;
 
         this.img = new Image();
-        this.img.src = './src/img/hashiru_girl.png';
+        // this.img.src = './src/img/running1.png'
+        this.frame = 1;
+        this.gameFrame = 0;
+        this.staggerFrames = 10;
+
+        // this.img.onload = () => {
+        //     this.width = this.img.width;
+        //     // let aspectRatio = this.img.widht / this.img.height;
+        //     // this.height = 200;
+        //     // this.width = this.height * aspectRatio;
+        // }
 
         this.collision = false;
+        this.collisionCount = 0;
+
+        this.score = 0;
         
         this.addEventHandlers();
+
+        this.delta = 25;
+        this.oldTime = 0;
+
+        this.img.src = `./src/img/running${this.frame}.png`;
+
+        // Draw background
+        // this.game.drawBackground();
+
 
     }
 
     // Update velocity
     addEventHandlers() {
+        // debugger
         document.addEventListener("keydown", (e) => {
-            // console.log(e);
+// debugger
             if (e.code === "ArrowLeft") {
+                // this.img.src = `./src/img/running${this.frame}.png`;
+
+                // debugger;
                 this.velocity.x = -3;
+                // debugger;
             } else if (e.code === "ArrowRight") {
+                // this.img.src = `./src/img/running${this.frame}.png`;
+
                 this.velocity.x = 3;
             }
 
             if (e.code === "ArrowUp") {
+                this.img.src = `./src/img/jump_up.png`;
+                this.oldTime = -30;
+
                 this.velocity.y = -15;
+                // debugger;
+
             }
         })
 
         // Stop movement
         document.addEventListener("keyup", (e) => {
-            // console.log(e);
+
             if (e.code === "ArrowLeft") {
                 this.velocity.x = 0;
             } else if (e.code === "ArrowRight") {
@@ -57,16 +91,23 @@ export default class Player {
     }
 
     animate() { 
+        // debugger;
 // debugger
+        // console.log(this.position);
+        // console.log(this.velocity);
         // It keeps falling unless the players bottom reaches to the bottom 
-        if (!this.collision && (this.position.y + this.height + this.velocity.y < this.canvas.height - 140)) {
+        // console.log("sum", this.position.y + this.height + this.velocity.y);
+        // console.log("canvas height", this.canvas.height - 175)
+        if (this.position.y + this.height + this.velocity.y < this.canvas.height - 140) {
+            // debugger;
             this.velocity.y += this.gravity;
         } else {
-            // Once the player reaches at the bottom, it'll stop falling
+            // Once the player reaches to the bottom, it'll stop falling
             this.velocity.y = 0;
         }
-        this.position.x += this.velocity.x;
+        // console.log(this.velocity);
         this.position.y += this.velocity.y;
+        this.position.x += this.velocity.x;
 
     }
 
@@ -74,19 +115,39 @@ export default class Player {
         // // Draw the square
         // this.ctx.fillStyle = 'green';
         // this.ctx.fillRect(this.position.x, this.position.y, this.width, this.height);
-        // debugger
-        this.ctx.drawImage(this.img, this.position.x, this.position.y);
+
+
+        // this.imgSources.forEach(imgSrc => {
+        //     this.img.src = imgSrc;
+        //     this.ctx.drawImage(this.img, this.position.x, this.position.y, this.width, this.height);
+        // })
+// debugger
+        // if (this.gameFrame % this.staggerFrames === 0){
+
+        if (this.oldTime === 0) {
+            this.img.src = `./src/img/running${this.frame}.png`;
+
+            // debugger;
+            this.frame = (this.frame + 1) % 4 || 4;
+            this.gameFrame++;
+
+        } else if (this.oldTime > this.delta) {
+            this.oldTime = -1;
+        } 
+        
+        this.ctx.drawImage(this.img, this.position.x, this.position.y, this.width, this.height);
+        this.oldTime += 1;
+        // console.log(this.oldTime);
+            
+
     }
 
     draw() {
         // Clear the canvas
-        this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+        // this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
 
-        // Draw background
-        this.game.drawBackground();
-
-        // Update player's position
-        this.animate(); 
+        
+        // Update player's positio
 
         // Draw obstacles;
         this.obstacles.animate();
@@ -97,6 +158,11 @@ export default class Player {
         
         // Draw player
         this.drawPlayer();
+
+        this.animate(); 
+
+         // Draw the score
+        // this.drawScore();
     }
 
       
@@ -113,39 +179,40 @@ export default class Player {
                     // }) 
                     // debugger
                 if ((playerBottom >= obstacle.y 
-                    && playerRight >= obstacle.left 
-                    && playerLeft <= obstacle.right)) {
+                        && playerRight >= obstacle.left 
+                        && playerLeft <= obstacle.right)
+                    || (playerBottom >= obstacle.y 
+                        && obstacle.left <= playerRight
+                        && playerLeft <= obstacle.right)
+                    || (playerBottom >= obstacle.y 
+                        && obstacle.right >= playerLeft
+                        && playerRight >= obstacle.x)) {
+
                     // Stop all the obstacles
                     that.obstacles.obstacles.forEach((obstacle) => {
                         obstacle.velocity = 0;  
                     }) 
-                    // ↓↓↓↓↓↓↓↓↓↓　修正必要　↓↓↓↓↓↓↓↓↓↓
                     // Stop player from falling 
-                    // this.position.y = obstacle.y - this.height;
                     this.velocity.y = 0;
+                    this.velocity.x = 0;
                     this.collision = true;
-                } else if ((playerBottom >= obstacle.y 
-                    && obstacle.left <= playerRight
-                    && playerLeft <= obstacle.right)) {
-                    // Stop all the obstacles
-                    that.obstacles.obstacles.forEach((obstacle) => {
-                        obstacle.velocity = 0;  
-                    }) 
-                    this.velocity.y = 0;
-                    this.collision = true;
-                } else if ((playerBottom >= obstacle.y 
-                    && obstacle.right >= playerLeft
-                    && playerRight >= obstacle.x)){
-                    // Stop all the obstacles
-                    that.obstacles.obstacles.forEach((obstacle) => {
-                        obstacle.velocity = 0;  
-                    }) 
-                    this.velocity.y = 0;
-                    this.collision = true;
+                    this.collisionCount += 1;
+                } else {
+                    this.score +=1 ;
                 }
-            }
+            } 
         })
     }
 
-
+        
+    drawScore() {
+        // loc will be the location 
+        const loc = {x: this.canvas.width / 2, y: this.canvas.height / 4}
+        this.ctx.font = "bold 50pt serif";
+        this.ctx.fillStyle = "white";
+        this.ctx.fillText(this.score, loc.x, loc.y);
+        this.ctx.strokeStyle = "black";
+        this.ctx.lineWidth = 2;
+        this.ctx.strokeText(this.score, loc.x, loc.y);
+    }
 }

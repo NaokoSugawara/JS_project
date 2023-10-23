@@ -32,6 +32,8 @@ export default class Game {
 
     gameLoop(){
         // debugger
+        this.drawBackground();
+
         this.player.draw();
         // this.drawBaseline();
         requestAnimationFrame(this.gameLoop.bind(this));
@@ -40,7 +42,8 @@ export default class Game {
     drawBackground(){
         this.ctx.drawImage(this.img, 0, 0);
      }
-        
+
+
 
     // jump() {
     // }
