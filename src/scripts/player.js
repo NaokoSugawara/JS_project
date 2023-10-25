@@ -24,8 +24,8 @@ export default class Player {
         this.img = new Image();
         // this.img.src = './src/img/running1.png'
         this.frame = 1;
-        this.gameFrame = 0;
-        this.staggerFrames = 10;
+        // this.gameFrame = 0;
+        // this.staggerFrames = 10;
 
         // this.img.onload = () => {
         //     this.width = this.img.width;
@@ -98,7 +98,7 @@ export default class Player {
         // It keeps falling unless the players bottom reaches to the bottom 
         // console.log("sum", this.position.y + this.height + this.velocity.y);
         // console.log("canvas height", this.canvas.height - 175)
-        if (this.position.y + this.height + this.velocity.y < this.canvas.height - 140) {
+        if (!this.collision && this.position.y + this.height + this.velocity.y < this.canvas.height - 140) {
             // debugger;
             this.velocity.y += this.gravity;
         } else {
@@ -124,21 +124,22 @@ export default class Player {
 // debugger
         // if (this.gameFrame % this.staggerFrames === 0){
 
-        if (this.oldTime === 0) {
-            this.img.src = `./src/img/running${this.frame}.png`;
-
-            // debugger;
-            this.frame = (this.frame + 1) % 4 || 4;
-            this.gameFrame++;
-
-        } else if (this.oldTime > this.delta) {
-            this.oldTime = -1;
-        } 
-        
+        // Delta回数分、同じ映像を繰り返し表示する
+        if (!this.collision) {
+            if (this.oldTime === 0) {
+                this.img.src = `./src/img/running${this.frame}.png`;
+    
+                // debugger;
+                this.frame = (this.frame + 1) % 4 || 4;
+    
+            } else if (this.oldTime > this.delta) {
+                this.oldTime = -1;
+            } 
+            this.oldTime += 1;
+        }
         this.ctx.drawImage(this.img, this.position.x, this.position.y, this.width, this.height);
-        this.oldTime += 1;
-        // console.log(this.oldTime);
-            
+
+
 
     }
 
@@ -167,7 +168,7 @@ export default class Player {
 
       
     detectCollision(){
-// debugger
+        // this.collision = false;
         this.obstacles.obstacles.forEach(obstacle => {
             if (obstacle.left <= this.canvas.width) {
                 const playerLeft = this.position.x;

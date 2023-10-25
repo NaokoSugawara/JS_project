@@ -20,7 +20,12 @@ export default class Obstacles {
         ];
 
         this.img = new Image();
-        this.img.src = './src/img/120Tyrannosaurus_hair.png';
+        // this.img.src = './src/img/120Tyrannosaurus_hair.png';
+        // 3172 x 2832px => 480w x 429h
+        this.img.src = './src/img/AdobeStock_551762638.png'; 
+        this.spriteWidth = 480 / 4;
+        this.spriteHeight = 429 / 4;
+    // }
     }
 
     
@@ -29,7 +34,9 @@ export default class Obstacles {
             left: x, 
             right: 50 + x, 
             y: 350,
-            velocity: 2
+            velocity: 2,
+            frameX: 0,
+            frameY: 3
         };
         return obstacle;
     }
@@ -52,6 +59,7 @@ export default class Obstacles {
     drawObstacles(ctx){
         // debugger
         this.eachObstacles(obstacle => {
+        // const obstacle = this.obstacles[0];
             // ctx.fillStyle = "red";
             // // debugger
             // ctx.fillRect(
@@ -60,8 +68,12 @@ export default class Obstacles {
             //     50, 
             //     50
             // );
-            ctx.drawImage(this.img, obstacle.left, obstacle.y);
-        });
+// debugger
+            ctx.drawImage(this.img, obstacle.frameX * this.spriteWidth, obstacle.frameY * this.spriteHeight, 
+                this.spriteWidth, this.spriteHeight, obstacle.left, obstacle.y, this.spriteWidth, this.spriteHeight);
+            if (obstacle.frameX < 3) obstacle.frameX++;
+            else obstacle.frameX = 0;
+        })
         
     }
 
