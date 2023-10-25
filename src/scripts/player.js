@@ -162,7 +162,7 @@ export default class Player {
         this.animate(); 
 
         // Draw obstacles;
-        this.obstacles.animate();
+        this.obstacles.animate(this.collision);
         
          // Draw the score
         // this.drawScore();

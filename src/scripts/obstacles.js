@@ -56,7 +56,7 @@ export default class Obstacles {
         }
     }
 
-    drawObstacles(ctx){
+    drawObstacles(ctx, collision){
         // debugger
         this.eachObstacles(obstacle => {
         // const obstacle = this.obstacles[0];
@@ -71,15 +71,17 @@ export default class Obstacles {
 // debugger
             ctx.drawImage(this.img, obstacle.frameX * this.spriteWidth, obstacle.frameY * this.spriteHeight, 
                 this.spriteWidth, this.spriteHeight, obstacle.left, obstacle.y, this.spriteWidth, this.spriteHeight);
-            if (obstacle.frameX < 3) obstacle.frameX++;
-            else obstacle.frameX = 0;
+            if (!collision) {
+                if (obstacle.frameX < 3) obstacle.frameX++;
+                else obstacle.frameX = 0;
+            }
         })
         
     }
 
-    animate() {
+    animate(collision) {
         this.moveObstacles();
-        this.drawObstacles(this.ctx);
+        this.drawObstacles(this.ctx, collision);
     }
 
     eachObstacles(callback) {
