@@ -59,16 +59,6 @@ export default class Obstacles {
     drawObstacles(ctx, collision){
         // debugger
         this.eachObstacles(obstacle => {
-        // const obstacle = this.obstacles[0];
-            // ctx.fillStyle = "red";
-            // // debugger
-            // ctx.fillRect(
-            //     obstacle.left, 
-            //     obstacle.y, 
-            //     50, 
-            //     50
-            // );
-// debugger
             ctx.drawImage(this.img, obstacle.frameX * this.spriteWidth, obstacle.frameY * this.spriteHeight, 
                 this.spriteWidth, this.spriteHeight, obstacle.left, obstacle.y, this.spriteWidth, this.spriteHeight);
             if (!collision) {

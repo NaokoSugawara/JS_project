@@ -12,6 +12,7 @@ export default class Game {
         // }
 
         this.collisionCount = 0;
+        this.gameover = false;
 
         this.img = new Image();
 
@@ -20,8 +21,8 @@ export default class Game {
 // debugger
 
         this.img.src = './src/img/background.jpg';
-
         this.img.onload = () => {
+            // debugger
             this.drawBackground();
             this.player.drawImage();
         }
@@ -48,28 +49,32 @@ export default class Game {
     gameLoop(){
         // debugger
         this.drawBackground();
+
         // debugger
         this.player.draw();
+
+        // Detect collision
+        // debugger
+        this.detectCollision();
 
         // Draw the score
         this.drawScore();
 
-        // // Draw gameover
-        // this.drawGameOver();
+        // Gameover?
+        this.gameOver();
 
-        // debugger
-        if (this.player.collision) {
+    }
+
+
+    gameOver(){
+        if (this.player.collision && !this.gameover) {
             this.player.collision = false;
-            // debugger
-            // setTimeout(this.gameLoop.bind(this), 5000);
-            // debugger
             setTimeout(this.restart.bind(this), 5000);
-
         } else {
+            // debugger
             requestAnimationFrame(this.gameLoop.bind(this));
         }
     }
-
 
     restart(){
         this.obstacles = new Obstacles(this.ctx);
@@ -113,7 +118,12 @@ export default class Game {
                     this.player.velocity.y = 0;
                     this.player.velocity.x = 0;
                     this.player.collision = true;
-                    this.collisionCount += 1;
+                    if (this.collisionCount < 3) {
+                        this.collisionCount += 1;
+                    }
+                    if (this.collisionCount >= 3) {
+                        this.gameover = true;
+                    }
                 } else {
                     this.player.score +=1 ;
                 }

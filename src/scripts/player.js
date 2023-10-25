@@ -22,58 +22,36 @@ export default class Player {
         this.height = 90;
 
         this.img = new Image();
-        // this.img.src = './src/img/running1.png'
         this.frame = 1;
-        // this.gameFrame = 0;
-        // this.staggerFrames = 10;
-
-        // this.img.onload = () => {
-        //     this.width = this.img.width;
-        //     // let aspectRatio = this.img.widht / this.img.height;
-        //     // this.height = 200;
-        //     // this.width = this.height * aspectRatio;
-        // }
+        this.img.src = `./src/img/running${this.frame}.png`;
 
         this.collision = false;
-        // this.collisionCount = 0;
 
         this.addEventHandlers();
 
         this.delta = 25;
         this.oldTime = 0;
 
-        this.img.src = `./src/img/running${this.frame}.png`;
-
-        // Draw background
-        // this.game.drawBackground();
-
-
     }
 
     // Update velocity
     addEventHandlers() {
-        // debugger
+
         document.addEventListener("keydown", (e) => {
-// debugger
+
             if (e.code === "ArrowLeft") {
                 // this.img.src = `./src/img/running${this.frame}.png`;
 
-                // debugger;
                 this.velocity.x = -3;
-                // debugger;
             } else if (e.code === "ArrowRight") {
                 // this.img.src = `./src/img/running${this.frame}.png`;
 
                 this.velocity.x = 3;
             }
-
             if (e.code === "ArrowUp") {
                 this.img.src = `./src/img/jump_up.png`;
                 this.oldTime = -30;
-
                 this.velocity.y = -15;
-                // debugger;
-
             }
         })
 
@@ -89,10 +67,7 @@ export default class Player {
     }
 
     animate() { 
-        // debugger;
-// debugger
-        // console.log(this.position);
-        // console.log(this.velocity);
+
         // It keeps falling unless the players bottom reaches to the bottom 
         // console.log("sum", this.position.y + this.height + this.velocity.y);
         // console.log("canvas height", this.canvas.height - 175)
@@ -114,16 +89,9 @@ export default class Player {
         // this.ctx.fillStyle = 'green';
         // this.ctx.fillRect(this.position.x, this.position.y, this.width, this.height);
 
-
-        // this.imgSources.forEach(imgSrc => {
-        //     this.img.src = imgSrc;
-        //     this.ctx.drawImage(this.img, this.position.x, this.position.y, this.width, this.height);
-        // })
-// debugger
-        // if (this.gameFrame % this.staggerFrames === 0){
-
         // Delta回数分、同じ映像を繰り返し表示する
         // If collides, no update for the charactor movement
+        // debugger
         if (!this.collision) {
             if (this.oldTime === 0) {
                 this.img.src = `./src/img/running${this.frame}.png`;
@@ -136,35 +104,25 @@ export default class Player {
             } 
             this.oldTime += 1;
         }
+        // debugger
         this.drawImage()
     }
+
 
     drawImage(){
         this.ctx.drawImage(this.img, this.position.x, this.position.y, this.width, this.height);
     }
 
+
     draw() {
-        // Clear the canvas
-        // this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
-
-        
-        // Update player's positio
-
-
-        // Detect collision
-        // debugger
-        this.game.detectCollision();
-        
         // Draw player
         this.drawPlayer();
 
+        // Update position
         this.animate(); 
 
         // Draw obstacles;
         this.obstacles.animate(this.collision);
-        
-
-
     }
 
 
