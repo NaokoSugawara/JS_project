@@ -18,6 +18,7 @@ export default class Game {
         this.obstacles = new Obstacles(this.ctx);
         this.player = new Player(this, this.obstacles, this.canvas, this.ctx);
 // debugger
+
         this.gameLoop();
     }
 
@@ -33,12 +34,31 @@ export default class Game {
     gameLoop(){
         // debugger
         this.drawBackground();
-
         this.player.draw();
-        // this.drawBaseline();
-        requestAnimationFrame(this.gameLoop.bind(this));
+
+        // debugger
+        if (this.player.collision) {
+            this.player.collision = false;
+            // debugger
+            // setTimeout(this.gameLoop.bind(this), 5000);
+            // debugger
+            setTimeout(this.restart.bind(this), 5000);
+
+        } else {
+            requestAnimationFrame(this.gameLoop.bind(this));
+        }
+    }
+
+
+    restart(){
+        this.obstacles = new Obstacles(this.ctx);
+        this.player = new Player(this, this.obstacles, this.canvas, this.ctx);
+
+        console.log("bello!")
+        this.gameLoop();
     }
    
+
     drawBackground(){
         this.ctx.drawImage(this.img, 0, 0);
      }
