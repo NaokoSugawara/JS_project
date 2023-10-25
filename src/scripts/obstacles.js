@@ -2,10 +2,6 @@
 export default class Obstacles {
     constructor(ctx){
         this.ctx = ctx;
-        // this.position = {
-        //     x: 700,
-        //     y: 450
-        // }
 
         const spaceBetObstacles = 150;
         this.firstObsDistance = Math.floor(Math.random() * 800) + 600;
@@ -20,12 +16,11 @@ export default class Obstacles {
         ];
 
         this.img = new Image();
-        // this.img.src = './src/img/120Tyrannosaurus_hair.png';
         // 3172 x 2832px => 480w x 429h
         this.img.src = './src/img/AdobeStock_551762638.png'; 
         this.spriteWidth = 480 / 4;
         this.spriteHeight = 429 / 4;
-    // }
+
     }
 
     

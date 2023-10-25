@@ -12,25 +12,23 @@
 
 <body>
     <!-- <div id="main"></div> -->
-    <nav>RUNNING GAME</nav>
-    <!-- <div class="flex">
-        <canvas id="runner_game" height="600" width="800"></canvas> 
-        <aside id="instruction" class="flex-child">instruction</aside>
-    </div> -->
+
+    <nav>SAUCY KID RUNNER</nav>
+
     <canvas id="runner_game" height="600" width="800"></canvas> 
 
-    <!-- <div id="over" style="text-align: center;">
-        <h1>GAME OVER</h1>
-    </div> -->
+    <footer><button id="start">START</button></footer>
 
-    <footer><button id="start">start</button></footer>
-
+    <!-- ↓↓↓↓↓↓↓↓↓↓ instruction ↓↓↓↓↓↓↓↓↓↓ -->
     <div class="btn-container">
-        <button class="instruction" id="btn3">instruction</button>
+        <button id="btn3">HOW TO PLAY</button>
     </div>
     <div id="mask" class="hidden"></div>
     <section id="modal" class="hidden">
-    <p>ボタン３がクリックされました！</p>
+        <p>===  HOW TO PLAY  ===</p>
+        <p> USE ↑ ↓ ← → KEY TO MOVE THE SAUCY KID AROUND </p>
+        <p> IF THE BIRD HITS HIM 3 TIMES, GAME OVER! </p>
+    </section>
 
 </body>
 <script src="./dist/main.js"></script>

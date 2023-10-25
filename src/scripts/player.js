@@ -85,9 +85,6 @@ export default class Player {
 
 
     drawPlayer() {
-        // // Draw the square
-        // this.ctx.fillStyle = 'green';
-        // this.ctx.fillRect(this.position.x, this.position.y, this.width, this.height);
 
         // Delta回数分、同じ映像を繰り返し表示する
         // If collides, no update for the charactor movement

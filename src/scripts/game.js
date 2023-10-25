@@ -120,14 +120,14 @@ export default class Game {
     drawScore() {
         // loc will be the location 
         const loc = {x: 380, y: this.canvas.height / 4}
-        this.ctx.font = "bold 30pt serif";
+        this.ctx.font = "bold 30pt Agency FB";
         this.ctx.fillStyle = "black";
         this.ctx.fillText(`${this.collisionCount}`, loc.x, loc.y);
         if (this.collisionCount >= 3) {
-            this.ctx.font = "bold 50pt serif";
+            this.ctx.font = "bold 50pt Agency FB";
             this.ctx.strokeStyle = "black";
             this.ctx.lineWidth = 2;
-            this.ctx.fillText(`Game Over`, loc.x-135, loc.y+60);
+            this.ctx.fillText(`Game Over`, loc.x-100, loc.y+70);
             this.start.disabled = false;
         }
 
