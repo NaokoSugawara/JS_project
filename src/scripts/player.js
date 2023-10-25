@@ -150,60 +150,62 @@ export default class Player {
         
         // Update player's positio
 
-        // Draw obstacles;
-        this.obstacles.animate();
+
 
         // Detect collision
         // debugger
-        this.detectCollision();
+        this.game.detectCollision();
         
         // Draw player
         this.drawPlayer();
 
         this.animate(); 
 
+        // Draw obstacles;
+        this.obstacles.animate();
+        
          // Draw the score
         // this.drawScore();
     }
 
       
-    detectCollision(){
-        // this.collision = false;
-        this.obstacles.obstacles.forEach(obstacle => {
-            if (obstacle.left <= this.canvas.width) {
-                const playerLeft = this.position.x;
-                const playerRight = playerLeft + this.width;
-                const playerBottom = this.position.y + this.height;
-                const that = this;
-                    // this.eachObstacles(obstacle => { 
-                    //     obstacle.velocity = 0;
-                    // }) 
-                    // debugger
-                if ((playerBottom >= obstacle.y 
-                        && playerRight >= obstacle.left 
-                        && playerLeft <= obstacle.right)
-                    || (playerBottom >= obstacle.y 
-                        && obstacle.left <= playerRight
-                        && playerLeft <= obstacle.right)
-                    || (playerBottom >= obstacle.y 
-                        && obstacle.right >= playerLeft
-                        && playerRight >= obstacle.x)) {
+    // detectCollision(){
+    //     // this.collision = false;
+    //     this.obstacles.obstacles.forEach(obstacle => {
+    //         if (obstacle.left <= this.canvas.width) {
+    //             const playerLeft = this.position.x;
+    //             const playerRight = playerLeft + this.width;
+    //             const playerBottom = this.position.y + this.height;
+    //             const that = this;
+    //                 // this.eachObstacles(obstacle => { 
+    //                 //     obstacle.velocity = 0;
+    //                 // }) 
+    //                 // debugger
+    //             if ((playerBottom >= obstacle.y 
+    //                     && playerRight >= obstacle.left 
+    //                     && playerLeft <= obstacle.right)
+    //                 || (playerBottom >= obstacle.y 
+    //                     && obstacle.left <= playerRight
+    //                     && playerLeft <= obstacle.right)
+    //                 || (playerBottom >= obstacle.y 
+    //                     && obstacle.right >= playerLeft
+    //                     && playerRight >= obstacle.x)) {
 
-                    // Stop all the obstacles
-                    that.obstacles.obstacles.forEach((obstacle) => {
-                        obstacle.velocity = 0;  
-                    }) 
-                    // Stop player from falling 
-                    this.velocity.y = 0;
-                    this.velocity.x = 0;
-                    this.collision = true;
-                    this.collisionCount += 1;
-                } else {
-                    this.score +=1 ;
-                }
-            } 
-        })
-    }
+    //                 // Stop all the obstacles
+    //                 that.obstacles.obstacles.forEach((obstacle) => {
+    //                     obstacle.velocity = 0;  
+    //                 }) 
+    //                 // Stop player from falling 
+    //                 this.velocity.y = 0;
+    //                 this.velocity.x = 0;
+    //                 this.collision = true;
+    //                 this.collisionCount += 1;
+    //             } else {
+    //                 this.score +=1 ;
+    //             }
+    //         } 
+    //     })
+    // }
 
         
     drawScore() {

@@ -43,7 +43,43 @@ export default class Game {
         this.ctx.drawImage(this.img, 0, 0);
      }
 
+    detectCollision(){
+        // this.collision = false;
+        this.obstacles.obstacles.forEach(obstacle => {
+            if (obstacle.left <= this.canvas.width) {
+                const playerLeft = this.player.position.x;
+                const playerRight = playerLeft + this.player.width;
+                const playerBottom = this.player.position.y + this.player.height;
+                const that = this.player;
+                    // this.eachObstacles(obstacle => { 
+                    //     obstacle.velocity = 0;
+                    // }) 
+                    // debugger
+                if ((playerBottom >= obstacle.y 
+                        && playerRight >= obstacle.left 
+                        && playerLeft <= obstacle.right)
+                    || (playerBottom >= obstacle.y 
+                        && obstacle.left <= playerRight
+                        && playerLeft <= obstacle.right)
+                    || (playerBottom >= obstacle.y 
+                        && obstacle.right >= playerLeft
+                        && playerRight >= obstacle.x)) {
 
+                    // Stop all the obstacles
+                    that.obstacles.obstacles.forEach((obstacle) => {
+                        obstacle.velocity = 0;  
+                    }) 
+                    // Stop player from falling 
+                    this.player.velocity.y = 0;
+                    this.player.velocity.x = 0;
+                    this.player.collision = true;
+                    this.player.collisionCount += 1;
+                } else {
+                    this.player.score +=1 ;
+                }
+            } 
+        })
+    }
 
     // jump() {
     // }
