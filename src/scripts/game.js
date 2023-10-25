@@ -6,10 +6,6 @@ export default class Game {
     constructor(canvas){
         this.canvas = canvas;
         this.ctx = canvas.getContext("2d");
-        // this.position = {
-        //     x: 375, // initial x position
-        //     y: canvas.height-150 // Initial Y position
-        // }
 
         this.collisionCount = 0;
         this.gameover = false;
@@ -37,21 +33,12 @@ export default class Game {
 
     }
 
-    // drawBaseline(){
-    //     this.ctx.beginPath();
-    //     this.ctx.moveTo(50, 500);
-    //     this.ctx.lineTo(750, 500);
-    //     this.ctx.lineWidth = 1;
-    //     this.ctx.strokeStyle = "black";
-    //     this.ctx.stroke();
-    // }
-
     gameLoop(){
         // debugger
         this.drawBackground();
 
         // debugger
-        this.player.draw();
+        this.player.animate();
 
         // Detect collision
         // debugger
@@ -62,7 +49,6 @@ export default class Game {
 
         // Gameover?
         this.gameOver();
-
     }
 
 

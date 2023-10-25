@@ -66,11 +66,10 @@ export default class Player {
         })
     }
 
-    animate() { 
+
+    movePlayer() { 
 
         // It keeps falling unless the players bottom reaches to the bottom 
-        // console.log("sum", this.position.y + this.height + this.velocity.y);
-        // console.log("canvas height", this.canvas.height - 175)
         if (!this.collision && this.position.y + this.height + this.velocity.y < this.canvas.height - 140) {
             // debugger;
             this.velocity.y += this.gravity;
@@ -83,6 +82,7 @@ export default class Player {
         this.position.x += this.velocity.x;
 
     }
+
 
     drawPlayer() {
         // // Draw the square
@@ -114,18 +114,16 @@ export default class Player {
     }
 
 
-    draw() {
+    animate() {
         // Draw player
         this.drawPlayer();
 
         // Update position
-        this.animate(); 
+        this.movePlayer(); 
 
         // Draw obstacles;
         this.obstacles.animate(this.collision);
     }
 
-
-        
 
 }
