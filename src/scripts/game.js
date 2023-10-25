@@ -11,7 +11,7 @@ export default class Game {
         //     y: canvas.height-150 // Initial Y position
         // }
 
-        this.failCnt = 0;
+        this.collisionCount = 0;
 
         this.img = new Image();
 
@@ -26,11 +26,12 @@ export default class Game {
             this.player.drawImage();
         }
 
-        const start = document.getElementById('start');
-        start.addEventListener("click", () => {
+        this.start = document.getElementById('start');
+        this.start.addEventListener("click", () => {
+            // debugger
             this.gameLoop();
             // Disable the button
-            start.disabled = true;
+            this.start.disabled = true;
         });
 
     }
@@ -50,8 +51,11 @@ export default class Game {
         // debugger
         this.player.draw();
 
-        // Draw score
+        // Draw the score
         this.drawScore();
+
+        // // Draw gameover
+        // this.drawGameOver();
 
         // debugger
         if (this.player.collision) {
@@ -109,7 +113,7 @@ export default class Game {
                     this.player.velocity.y = 0;
                     this.player.velocity.x = 0;
                     this.player.collision = true;
-                    this.player.collisionCount += 1;
+                    this.collisionCount += 1;
                 } else {
                     this.player.score +=1 ;
                 }
@@ -122,10 +126,15 @@ export default class Game {
         const loc = {x: 380, y: this.canvas.height / 4}
         this.ctx.font = "bold 30pt serif";
         this.ctx.fillStyle = "black";
-        this.ctx.fillText(`${this.failCnt}`, loc.x, loc.y);
-        this.ctx.strokeStyle = "black";
-        this.ctx.lineWidth = 2;
-        this.ctx.fillText(`${3-this.failCnt}`, loc.x, loc.y+40);
+        this.ctx.fillText(`${this.collisionCount}`, loc.x, loc.y);
+        if (this.collisionCount >= 3) {
+            this.ctx.font = "bold 50pt serif";
+            this.ctx.strokeStyle = "black";
+            this.ctx.lineWidth = 2;
+            this.ctx.fillText(`Game Over`, loc.x-135, loc.y+60);
+            this.start.disabled = false;
+        }
+
     }
 }
 

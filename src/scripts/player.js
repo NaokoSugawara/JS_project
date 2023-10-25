@@ -35,7 +35,7 @@ export default class Player {
         // }
 
         this.collision = false;
-        this.collisionCount = 0;
+        // this.collisionCount = 0;
 
         this.addEventHandlers();
 
@@ -123,6 +123,7 @@ export default class Player {
         // if (this.gameFrame % this.staggerFrames === 0){
 
         // Delta回数分、同じ映像を繰り返し表示する
+        // If collides, no update for the charactor movement
         if (!this.collision) {
             if (this.oldTime === 0) {
                 this.img.src = `./src/img/running${this.frame}.png`;
@@ -162,8 +163,8 @@ export default class Player {
         // Draw obstacles;
         this.obstacles.animate(this.collision);
         
-         // Draw the score
-        // this.drawScore();
+
+
     }
 
 
