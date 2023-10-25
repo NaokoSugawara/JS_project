@@ -8,7 +8,7 @@ export default class Obstacles {
         // }
 
         const spaceBetObstacles = 150;
-        this.firstObsDistance = Math.floor(Math.random() * 800) + 400;
+        this.firstObsDistance = Math.floor(Math.random() * 800) + 600;
         const randomNum1 = Math.floor(Math.random() * 800) + 300;
         const randomNum2 = Math.floor(Math.random() * 800) + 300;
 

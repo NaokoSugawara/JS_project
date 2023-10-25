@@ -8,7 +8,7 @@ export default class Player {
         this.ctx = ctx;
         this.position = {
             x: 330,
-            y: 100
+            y: 350
             // y: 100
         }
         this.velocity = {
@@ -37,8 +37,6 @@ export default class Player {
         this.collision = false;
         this.collisionCount = 0;
 
-        this.score = 0;
-        
         this.addEventHandlers();
 
         this.delta = 25;
@@ -137,10 +135,11 @@ export default class Player {
             } 
             this.oldTime += 1;
         }
+        this.drawImage()
+    }
+
+    drawImage(){
         this.ctx.drawImage(this.img, this.position.x, this.position.y, this.width, this.height);
-
-
-
     }
 
     draw() {
@@ -149,7 +148,6 @@ export default class Player {
 
         
         // Update player's positio
-
 
 
         // Detect collision
@@ -168,54 +166,7 @@ export default class Player {
         // this.drawScore();
     }
 
-      
-    // detectCollision(){
-    //     // this.collision = false;
-    //     this.obstacles.obstacles.forEach(obstacle => {
-    //         if (obstacle.left <= this.canvas.width) {
-    //             const playerLeft = this.position.x;
-    //             const playerRight = playerLeft + this.width;
-    //             const playerBottom = this.position.y + this.height;
-    //             const that = this;
-    //                 // this.eachObstacles(obstacle => { 
-    //                 //     obstacle.velocity = 0;
-    //                 // }) 
-    //                 // debugger
-    //             if ((playerBottom >= obstacle.y 
-    //                     && playerRight >= obstacle.left 
-    //                     && playerLeft <= obstacle.right)
-    //                 || (playerBottom >= obstacle.y 
-    //                     && obstacle.left <= playerRight
-    //                     && playerLeft <= obstacle.right)
-    //                 || (playerBottom >= obstacle.y 
-    //                     && obstacle.right >= playerLeft
-    //                     && playerRight >= obstacle.x)) {
-
-    //                 // Stop all the obstacles
-    //                 that.obstacles.obstacles.forEach((obstacle) => {
-    //                     obstacle.velocity = 0;  
-    //                 }) 
-    //                 // Stop player from falling 
-    //                 this.velocity.y = 0;
-    //                 this.velocity.x = 0;
-    //                 this.collision = true;
-    //                 this.collisionCount += 1;
-    //             } else {
-    //                 this.score +=1 ;
-    //             }
-    //         } 
-    //     })
-    // }
 
         
-    drawScore() {
-        // loc will be the location 
-        const loc = {x: this.canvas.width / 2, y: this.canvas.height / 4}
-        this.ctx.font = "bold 50pt serif";
-        this.ctx.fillStyle = "white";
-        this.ctx.fillText(this.score, loc.x, loc.y);
-        this.ctx.strokeStyle = "black";
-        this.ctx.lineWidth = 2;
-        this.ctx.strokeText(this.score, loc.x, loc.y);
-    }
+
 }

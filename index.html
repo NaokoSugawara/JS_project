@@ -6,13 +6,32 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <link rel="stylesheet" href="./dist/main.css" />
-
+    <link rel="icon" type="image/x-icon" href="./src/img/daruma.png">
     <title>Demo Javascript Project</title>
 </head>
 
 <body>
-    <div id="main"></div>
-    <canvas id="runner_game" height="600" width="800"></canvas>
+    <!-- <div id="main"></div> -->
+    <nav>RUNNING GAME</nav>
+    <!-- <div class="flex">
+        <canvas id="runner_game" height="600" width="800"></canvas> 
+        <aside id="instruction" class="flex-child">instruction</aside>
+    </div> -->
+    <canvas id="runner_game" height="600" width="800"></canvas> 
+
+    <!-- <div id="over" style="text-align: center;">
+        <h1>GAME OVER</h1>
+    </div> -->
+
+    <footer><button id="start">start</button></footer>
+
+    <div class="btn-container">
+        <button class="instruction" id="btn3">instruction</button>
+    </div>
+    <div id="mask" class="hidden"></div>
+    <section id="modal" class="hidden">
+    <p>ボタン３がクリックされました！</p>
+
 </body>
 <script src="./dist/main.js"></script>
 
