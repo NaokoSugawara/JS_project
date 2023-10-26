@@ -1,7 +1,17 @@
+Overview/Description of Project
+Live Link to the hosted project
+Screenshots/GIFs of project features
+1-2 Code Snippets showing something you did
+
 # JavaScript Project 
 
+The user can make the saucy kid on the screen run avoiding birds 
+which appear on the screen. 
 
-## Background
+[play here](https://naokosugawara.github.io/JS_project/)
+![screenshot](/home/nao/JS_project/screenshot.png)
+
+## Overview
 
 The user can make the charactor on the screen run avoiding obstacles 
 which appear on the screen. 
