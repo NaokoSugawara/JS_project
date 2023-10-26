@@ -15,6 +15,7 @@ In the darkness, the factory seems empty... or is it?
 
 ### Basic Rendering
 
+
 A `GameView` class renders the game, using a `requestAnimationFrame` loop to maintain a constant 60fps refresh rate.
 
 ```javascript

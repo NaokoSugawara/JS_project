@@ -35,14 +35,12 @@ export default class Game {
     }
 
     gameLoop(){
-        // debugger
+        
         this.drawBackground();
 
-        // debugger
         this.player.animate();
 
         // Detect collision
-        // debugger
         this.detectCollision();
 
         // Draw the score
@@ -51,7 +49,6 @@ export default class Game {
         // Gameover?
         this.gameOver();
 
-        
         // requestAnimationFrame(this.gameLoop.bind(this));
     }
 

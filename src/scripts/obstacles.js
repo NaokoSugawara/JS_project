@@ -79,7 +79,4 @@ export default class Obstacles {
         this.obstacles.forEach(callback.bind(this));
     }
 
-
-
-
 }

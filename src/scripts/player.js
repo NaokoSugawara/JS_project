@@ -85,7 +85,6 @@ export default class Player {
     drawPlayer() {
         // Delta回数分、同じ映像を繰り返し表示する
         // If collides, no update for the charactor movement
-        // debugger
         if (!this.collision) {
             if (this.oldTime === 0) {
                 this.img.src = `./src/img/running${this.frame}.png`; 
@@ -96,7 +95,6 @@ export default class Player {
             } 
             this.oldTime += 1;
         }
-        // debugger
         this.drawImage()
     }
 
