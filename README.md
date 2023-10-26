@@ -10,7 +10,7 @@ which appear on the screen.
 
 [play here](https://naokosugawara.github.io/JS_project/)
 
-![screenshot](./docs/screenshots/monster_attack.png)
+![screenshot](./docs/screenshots/saucy_kid_runner.png)
 
 ## Overview
 
