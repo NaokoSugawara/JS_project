@@ -16,47 +16,27 @@ nav {
   padding-top: 5px;
   padding-bottom: 10px;
   margin: auto;
-  margin-bottom: 10px;
+  margin-top: 15px;
+  margin-bottom: 15px;
   border-radius: 10px;
   text-align: center;
   background-color: dimgray;
-}
-
-.flex {
-  display: flex;
-}
-
-.flex-child {
-  width: 80%;
-  justify-content: center;
-}
-
-#instruction {
-  width: 10%;
-  margin: 10px;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='4' height='4' viewBox='0 0 4 4'%3E%3Cpath fill='%239C92AC' fill-opacity='0.4' d='M1 3h1v1H1V3zm2-2h1v1H3V1z'%3E%3C/path%3E%3C/svg%3E");
 }
 
 footer {
-  margin-top: 15px;
+  margin: auto;
   text-align: center;
 }
 
 button {
   font-family: "Agency FB";
-  vertical-align: middle;
-}
-
-.btn-container {
-  text-align: center;
-}
-
-.instruction {
-  width: 80%;
-  height: 50px;
-  font-size: 18px;
   font-weight: bold;
-  /* ボタンにカーソルを当てると、カーソルがポインターに変わる */
-  cursor: pointer;
+  font-size: large;
+  vertical-align: middle;
+  border-radius: 10px;
+  background-color: dimgray;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='4' height='4' viewBox='0 0 4 4'%3E%3Cpath fill='%239C92AC' fill-opacity='0.4' d='M1 3h1v1H1V3zm2-2h1v1H3V1z'%3E%3C/path%3E%3C/svg%3E");
 }
 
 /* ボタンにカーソルを当てたとき、ボタンを半透明にする */
@@ -91,6 +71,31 @@ button:hover {
   text-align: center;
   margin: 0 auto;
   z-index: 2;
+}
+
+a {
+  margin-left: 3px;
+  margin-right: 5px;
+}
+
+.f-container {
+  display: flex;
+}
+
+.f-child {
+  margin-top: 20px;
+  justify-content: space-around;
+  width: 33%;
+}
+
+#start {
+  width: 60px;
+  height: 35px;
+}
+
+#howtoplay {
+  width: 120px;
+  height: 35px;
 }
 
 #main {

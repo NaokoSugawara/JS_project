@@ -66,7 +66,6 @@ export default class Game {
             this.player.collision = false;
             this.collisionCount = 0;
             this.gameover = false;
-console.log("gameover");
         } else {
             requestAnimationFrame(this.gameLoop.bind(this));
         }

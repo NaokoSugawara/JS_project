@@ -104,8 +104,8 @@ export default class Player {
     drawImage(){
 
         // for debug
-        this.ctx.fillStyle = "magenta";
-        this.ctx.fillRect(this.position.x, this.position.y, this.width, this.height);
+        // this.ctx.fillStyle = "magenta";
+        // this.ctx.fillRect(this.position.x, this.position.y, this.width, this.height);
 
 
         this.ctx.drawImage(this.img, this.position.x, this.position.y, this.width, this.height);

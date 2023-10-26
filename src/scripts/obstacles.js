@@ -56,8 +56,8 @@ export default class Obstacles {
         this.eachObstacles(obstacle => {
 
             // for debug
-            ctx.fillStyle = "magenta";
-            ctx.fillRect(obstacle.left, obstacle.y, this.spriteWidth, this.spriteHeight);
+            // ctx.fillStyle = "magenta";
+            // ctx.fillRect(obstacle.left, obstacle.y, this.spriteWidth, this.spriteHeight);
 
 
             ctx.drawImage(this.img, obstacle.frameX * this.spriteWidth, obstacle.frameY * this.spriteHeight, 
