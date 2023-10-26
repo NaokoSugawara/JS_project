@@ -68,7 +68,6 @@ export default class Player {
 
 
     movePlayer() { 
-
         // It keeps falling unless the players bottom reaches to the bottom 
         if (!this.collision && this.position.y + this.height + this.velocity.y < this.canvas.height - 140) {
             // debugger;
@@ -80,22 +79,18 @@ export default class Player {
         // console.log(this.velocity);
         this.position.y += this.velocity.y;
         this.position.x += this.velocity.x;
-
     }
 
 
     drawPlayer() {
-
         // Delta回数分、同じ映像を繰り返し表示する
         // If collides, no update for the charactor movement
         // debugger
         if (!this.collision) {
             if (this.oldTime === 0) {
-                this.img.src = `./src/img/running${this.frame}.png`;
-    
+                this.img.src = `./src/img/running${this.frame}.png`; 
                 // debugger;
                 this.frame = (this.frame + 1) % 4 || 4;
-    
             } else if (this.oldTime > this.delta) {
                 this.oldTime = -1;
             } 
@@ -107,6 +102,12 @@ export default class Player {
 
 
     drawImage(){
+
+        // for debug
+        this.ctx.fillStyle = "magenta";
+        this.ctx.fillRect(this.position.x, this.position.y, this.width, this.height);
+
+
         this.ctx.drawImage(this.img, this.position.x, this.position.y, this.width, this.height);
     }
 

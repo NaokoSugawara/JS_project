@@ -10,12 +10,10 @@ export default class Game {
         this.collisionCount = 0;
         this.gameover = false;
 
-        this.img = new Image();
-
         this.obstacles = new Obstacles(this.ctx);
         this.player = new Player(this, this.obstacles, this.canvas, this.ctx);
-// debugger
 
+        this.img = new Image(); 
         this.img.src = './src/img/background.jpg';
         this.img.onload = () => {
             // debugger
@@ -24,13 +22,16 @@ export default class Game {
         }
 
         this.start = document.getElementById('start');
+        this.addEventHandlers();
+    }
+    
+    
+    addEventHandlers(){
         this.start.addEventListener("click", () => {
-            // debugger
-            this.gameLoop();
             // Disable the button
             this.start.disabled = true;
+            this.restart();
         });
-
     }
 
     gameLoop(){
@@ -49,15 +50,24 @@ export default class Game {
 
         // Gameover?
         this.gameOver();
+
+        
+        // requestAnimationFrame(this.gameLoop.bind(this));
     }
 
 
     gameOver(){
+        // Produce obstacles till game over
         if (this.player.collision && !this.gameover) {
             this.player.collision = false;
-            setTimeout(this.restart.bind(this), 5000);
+            setTimeout(this.restart.bind(this), 4000);
+        } else if (this.gameover) {
+            this.start.disabled = false;
+            this.player.collision = false;
+            this.collisionCount = 0;
+            this.gameover = false;
+console.log("gameover");
         } else {
-            // debugger
             requestAnimationFrame(this.gameLoop.bind(this));
         }
     }
@@ -75,7 +85,6 @@ export default class Game {
      }
 
     detectCollision(){
-        // this.collision = false;
         this.obstacles.obstacles.forEach(obstacle => {
             if (obstacle.left <= this.canvas.width) {
                 const playerLeft = this.player.position.x;
@@ -85,7 +94,7 @@ export default class Game {
                     // this.eachObstacles(obstacle => { 
                     //     obstacle.velocity = 0;
                     // }) 
-                    // debugger
+                // Detect collision
                 if ((playerBottom >= obstacle.y 
                         && playerRight >= obstacle.left 
                         && playerLeft <= obstacle.right)
@@ -104,12 +113,12 @@ export default class Game {
                     this.player.velocity.y = 0;
                     this.player.velocity.x = 0;
                     this.player.collision = true;
-                    if (this.collisionCount < 3) {
+                    if (!this.gameover && this.collisionCount < 3) {
                         this.collisionCount += 1;
                     }
-                    if (this.collisionCount >= 3) {
-                        this.gameover = true;
-                    }
+                    // if (this.collisionCount >= 3) {
+                    //     this.gameover = true;
+                    // }
                 } else {
                     this.player.score +=1 ;
                 }
@@ -118,19 +127,17 @@ export default class Game {
     }
 
     drawScore() {
-        // loc will be the location 
         const loc = {x: 380, y: this.canvas.height / 4}
         this.ctx.font = "bold 30pt Agency FB";
         this.ctx.fillStyle = "black";
         this.ctx.fillText(`${this.collisionCount}`, loc.x, loc.y);
-        if (this.collisionCount >= 3) {
+        if (this.collisionCount >= 3) { // Game over
             this.ctx.font = "bold 50pt Agency FB";
             this.ctx.strokeStyle = "black";
             this.ctx.lineWidth = 2;
             this.ctx.fillText(`Game Over`, loc.x-100, loc.y+70);
-            this.start.disabled = false;
+            this.gameover = true;
         }
-
     }
 }
 
