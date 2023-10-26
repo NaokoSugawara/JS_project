@@ -9,7 +9,7 @@ The user can make the saucy kid on the screen run avoiding birds
 which appear on the screen. 
 
 [play here](https://naokosugawara.github.io/JS_project/)
-![screenshot](/home/nao/JS_project/screenshot.png)
+![screenshot](https://github.com/NaokoSugawara/JS_project/blob/main/screenshot.png)
 
 ## Overview
 
